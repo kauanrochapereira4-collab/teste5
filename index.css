@@ -1,0 +1,583 @@
+/* ==========================================================================
+   Instituto Missionário Servos de Jesus Salvador — Identidade Digital
+   Paleta: institucional (vinho) / humildade (marrom) / leveza (dourado-creme)
+   ========================================================================== */
+:root{
+  --vinho:          #6F1610;
+  --vinho-escuro:   #591414;
+  --marrom:         #432818;
+  --dourado:        #CDA74F;
+  --dourado-claro:  #EFDDB8;
+  --ouro-brilhante: #C9861A;
+  --creme:          #F8F3E6;
+  --creme-2:        #f1e6d2;
+  --tinta:          #333333;
+  --tinta-suave:    #6b5a4a;
+  --linha:          rgba(67,40,24,.14);
+  --sombra:         0 3px 10px rgba(67,40,24,.12);
+  --radius:         8px;
+  --serif:          "Lora", Georgia, "Times New Roman", serif;
+  --display:        "Cinzel", var(--serif);
+  --ui:             "Montserrat", "Helvetica Neue", Arial, sans-serif;
+}
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+html{
+  scroll-behavior:smooth;
+  /* Tipografia fluida: a base em rem cresce/diminui suavemente com a largura
+     da tela (e também acompanha o zoom do navegador), então tudo que usa rem
+     — textos, paddings, gaps — se ajusta em vez de ficar "quebrado" nos extremos. */
+  font-size: clamp(15px, 0.6vw + 12.5px, 19px);
+  height:100%;
+  overflow-x:hidden;
+}
+body{
+  margin:0;
+  font-family:var(--serif);
+  color:var(--tinta);
+  background:var(--creme);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  /* Rodapé "grudado" no fim da tela: o body ocupa no mínimo a altura toda
+     da janela e o <main> cresce para empurrar o footer para baixo, então
+     nunca sobra área vazia (cinza) abaixo do rodapé, seja qual for o
+     tamanho da tela ou o nível de zoom. */
+  min-height:100vh;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  /* Trava qualquer scroll horizontal indesejado (ex.: o menu do celular,
+     que fica posicionado fora da tela quando fechado) */
+  overflow-x:hidden;
+  width:100%;
+}
+main{ flex:1 0 auto; margin-top:0; padding-top:0; }
+.site-footer{ flex:0 0 auto; }
+img{ max-width:100%; display:block; height:auto; }
+a{ color:inherit; text-decoration:none; }
+h1,h2,h3,h4{ 
+  font-family:var(--ui); 
+  font-weight:700; 
+  color:var(--vinho-escuro); 
+  margin:0 0 .5em; 
+  letter-spacing:.01em; 
+}
+p{ margin:0 0 1em; }
+.container{ width:min(1120px, 92%); margin:0 auto; }
+:focus-visible{ outline:3px solid var(--dourado); outline-offset:3px; }
+@media (prefers-reduced-motion: reduce){ *{ animation-duration:.001ms !important; transition-duration:.001ms !important; } }
+/* --- Cabeçalho / Navegação --- */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:var(--vinho-escuro);
+  border-bottom:2px solid var(--dourado);
+  margin-bottom:0;
+}
+.header-bar{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1.5rem; padding:.6rem 0;
+}
+/* Cabeçalho ocupa a largura toda da tela (sem o respiro centralizado do .container),
+   assim a marca fica colada à esquerda da janela. */
+.site-header .container.header-bar{
+  width:100%; max-width:none; margin:0; padding-left:1.6rem; padding-right:1.6rem;
+}
+.brand{ 
+  display:flex; align-items:center; gap:.9rem; 
+  text-decoration:none;
+}
+.brand-mark{ 
+  width:52px; height:52px; flex:none; 
+  display:flex; align-items:center; justify-content:center;
+  background:transparent;
+  border-radius:0;
+}
+.brand-mark img{ 
+  width:100%; height:100%; object-fit:contain; 
+  display:block;
+  border-radius:0;
+  background:transparent;
+}
+.brand-text{ 
+  display:flex; flex-direction:column; 
+  line-height:1.2;
+}
+.brand-text .eyebrow-brand{ 
+  display:block; 
+  font-family:var(--ui); 
+  font-size:.78rem; 
+  color:var(--dourado);
+  font-weight:500; 
+  line-height:1.3;
+}
+.brand-text .brand-name{ 
+  font-family:var(--ui); 
+  font-weight:700; 
+  font-size:.98rem; 
+  color:#fff;
+  letter-spacing:.02em; 
+}
+nav.primary-nav{ display:flex; align-items:center; gap:.2rem; }
+nav.primary-nav ul{ list-style:none; display:flex; gap:.1rem; margin:0; padding:0; align-items:center; }
+nav.primary-nav > ul > li{ position:relative; }
+nav.primary-nav > ul > li > a{
+  display:block; padding:.7rem 1rem; font-family:var(--ui); font-size:.88rem; font-weight:500;
+  letter-spacing:.01em; color:#fff; border-bottom:2px solid transparent; 
+  transition:all .25s ease; cursor:pointer;
+}
+nav.primary-nav > ul > li > a:hover{ color:var(--dourado); border-bottom-color:var(--dourado); }
+/* --- Botão "Área do Irmão" no menu (estilo pill, ícone + texto) --- */
+nav.primary-nav .nav-account{
+  display:flex !important; align-items:center; gap:.5rem;
+  background:var(--dourado); color:var(--vinho-escuro) !important;
+  padding:.55rem 1.1rem !important; border-radius:999px;
+  font-weight:700 !important; border-bottom:none !important;
+  margin-left:.4rem;
+}
+nav.primary-nav .nav-account:hover{
+  background:var(--ouro-brilhante); color:var(--vinho-escuro) !important;
+  border-bottom:none !important; transform:translateY(-1px);
+}
+nav.primary-nav .nav-account .nav-account-icon{
+  width:20px; height:20px; border-radius:50%; background:var(--vinho-escuro);
+  display:flex; align-items:center; justify-content:center; flex:none;
+}
+nav.primary-nav .nav-account .nav-account-icon svg{ width:12px; height:12px; fill:var(--dourado); }
+nav.primary-nav > ul > li.active > a,
+nav.primary-nav > ul > li.has-dropdown.active > a{ 
+  background:transparent; 
+  color:var(--dourado); 
+  font-weight:600; 
+  border-bottom:2px solid var(--dourado); 
+}
+nav.primary-nav > ul > li.has-dropdown > a::after{ 
+  content:" ▾"; 
+  font-size:.7em; 
+  color:var(--dourado); 
+  display:inline-block;
+  transition:transform .25s ease;
+}
+nav.primary-nav > ul > li.has-dropdown.open > a::after{
+  transform:rotate(180deg);
+}
+/* --- Dropdown — Abre SÓ ao Clicar (sem hover) --- */
+.dropdown{
+  position:absolute; top:100%; left:0; min-width:260px; 
+  background:linear-gradient(160deg, #fff9f5 0%, #ffffff 100%);
+  border:1px solid var(--dourado-claro); 
+  box-shadow:0 10px 30px rgba(95, 22, 16, .22); 
+  padding:.7rem 0; border-radius:10px;
+  opacity:0; visibility:hidden; transform:translateY(12px);
+  transition:opacity .25s ease, transform .25s ease, visibility .25s;
+  z-index:100;
+}
+.has-dropdown.open .dropdown{ 
+  opacity:1; visibility:visible; transform:translateY(0); 
+}
+.dropdown a{ 
+  display:block; padding:.85rem 1.2rem; font-family:var(--ui); 
+  font-size:.9rem; color:var(--marrom); 
+  border-radius:0; margin:0 .4rem;
+  transition:all .2s ease;
+  border-left:3px solid transparent;
+}
+.dropdown a:hover{ 
+  background:linear-gradient(90deg, rgba(205,167,79,.18) 0%, transparent 100%); 
+  color:var(--vinho); 
+  border-left-color:var(--dourado);
+  padding-left:1.4rem;
+}
+.nav-toggle{ display:none; background:none; border:1px solid rgba(243,215,163,.4); padding:.5rem .65rem; font-size:1.1rem; color:#f1e4cc; cursor:pointer; }
+/* --- Botão Fechar no Menu Lateral --- */
+.nav-close{
+  display:none;
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  background:transparent;
+  border:1px solid var(--dourado);
+  color:var(--dourado);
+  font-size:1rem;
+  padding:.4rem .8rem;
+  border-radius:6px;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.nav-close:hover{
+  background:var(--dourado);
+  color:var(--vinho-escuro);
+}
+/* ==========================================================
+   HERO
+   ========================================================== */
+.home-hero {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--creme);
+  padding-bottom: 10px;
+}
+.home-hero-photo {
+  position: relative;
+  width: 100%;
+  padding-top: 50%;
+  overflow: hidden;
+  z-index: 1;
+  border-bottom-left-radius: 50% 12%;
+  border-bottom-right-radius: 50% 12%;
+}
+.home-hero-photo-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  z-index: 1;
+}
+.home-hero-photo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #CDA74F 20%,
+    #EFDDB8 50%,
+    #CDA74F 80%,
+    transparent 100%
+  );
+  border-bottom-left-radius: 50% 12%;
+  border-bottom-right-radius: 50% 12%;
+}
+.home-hero-box {
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  width: min(540px, 85%);
+  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+  }
+}
+.home-hero-box-inner {
+  width: 100%;
+  background: linear-gradient(
+    145deg,
+    rgba(90, 16, 22, 0.85),
+    rgba(60, 10, 15, 0.90)
+  );
+  color: #fff;
+  text-align: center;
+  padding: 20px 28px 22px;
+  border-radius: 16px;
+  border: 1px solid var(--dourado);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  transition: all .4s ease !important;
+}
+.home-hero-box-inner:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 35px rgba(111, 22, 16, .55), inset 0 0 0 1px rgba(205,167,79,.3);
+  border-color: var(--ouro-brilhante);
+}
+.home-hero-box-inner:hover h1 {
+  color: var(--dourado-claro);
+  text-shadow: 0 0 12px rgba(205,167,79,.4);
+}
+.home-hero-box-inner h1 {
+  font-family: var(--display);
+  color: #fff;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.hero-text {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--dourado-claro);
+  font-size: 0.92rem;
+  margin-bottom: 0.35rem;
+  line-height: 1.5;
+}
+.hero-meta {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.8rem;
+  color: #e9d4b8;
+  margin-bottom: 0;
+  opacity: 0.92;
+  line-height: 1.4;
+}
+/* --- Cartões: Prior Geral e Fundador --- */
+.prior-message{ padding-top:0; }
+.priest-card, .founder-card{
+  display:flex; gap:1.8rem; align-items:flex-start; background:#fff;
+  padding:2rem; border-radius:8px; box-shadow:0 3px 10px rgba(67,40,24,.12);
+  border-top:1px solid var(--dourado-claro);
+}
+.priest-card{ border-left:5px solid var(--dourado); }
+.founder-card{ border-left:5px solid var(--marrom); background:linear-gradient(90deg,#fff9f5 0%,#ffffff 100%); }
+.priest-photo{
+  width:150px; flex:none; border-radius:6px; overflow:hidden;
+  border:3px solid var(--dourado-claro); box-shadow:0 2px 8px rgba(0,0,0,.15);
+  margin-top: 2rem;
+}
+.founder-photo{
+  width:150px; flex:none; border-radius:6px; overflow:hidden;
+  border:3px solid var(--dourado-claro); box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+.priest-photo img, .founder-photo img{ width:100%; display:block; height:100%; object-fit:cover; }
+.priest-content h3{
+  color:var(--marrom); font-family:var(--display); font-size:1.15rem; margin-bottom:.8rem;
+  padding-bottom:.5rem; border-bottom:2px dotted var(--dourado-claro);
+}
+.priest-content p{ margin-bottom:.85rem; font-size:.98rem; line-height:1.65; }
+.prior-blessing{ margin-top:.8rem; font-weight:600; color:var(--marrom); }
+.card-quote{
+  font-style:italic; color:var(--marrom); margin:.4rem 0 1.2rem; padding:.8rem 1rem;
+  border-left:4px solid var(--dourado); border-radius:0 6px 6px 0;
+  background:linear-gradient(90deg, rgba(205,167,79,.14) 0%, transparent 100%);
+  font-size:.98rem; line-height:1.6;
+}
+.founder-cite{ 
+  font-family:var(--ui); font-weight:700; font-size:.9rem; 
+  letter-spacing:.02em; color:var(--marrom); margin-bottom:.3rem; 
+}
+.founder-sub{ font-size:.85rem; color:#777; margin-top:.2rem; }
+/* --- Seções e Grades --- */
+section{ padding:4rem 0; }
+.section-block{ padding-top:1rem; }
+.grid{ display:grid; gap:1.8rem; }
+.grid-3{ grid-template-columns:repeat(3,1fr); }
+.card{
+  background:#fff; border:none; border-radius:8px; padding:1.6rem;
+  box-shadow:0 3px 10px rgba(67,40,24,.10); border-top:4px solid var(--dourado);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.card:hover{ transform:translateY(-4px); box-shadow:0 5px 15px rgba(67,40,24,.18); }
+.card h3{ font-size:1.08rem; color:var(--marrom); margin-bottom:.8rem; }
+.card p{ font-size:.95rem; line-height:1.6; }
+/* --- Botões --- */
+.btn{
+  display:inline-block; font-family:var(--ui); font-weight:600; font-size:.88rem; letter-spacing:.01em;
+  padding:.75rem 1.4rem; border:none; border-radius:5px; color:#fff; background:var(--marrom); cursor:pointer;
+  transition:all .3s ease;
+}
+.btn:hover{ background:#5a3622; box-shadow:0 3px 8px rgba(67,40,24,.3); }
+.btn-gold{ 
+  background:linear-gradient(135deg, var(--dourado) 0%, var(--ouro-brilhante) 100%); 
+  color:var(--marrom); font-weight:700; 
+}
+.btn-gold:hover{ 
+  background:linear-gradient(135deg, var(--ouro-brilhante) 0%, var(--dourado) 100%); 
+  color:var(--marrom); 
+}
+/* --- Rodapé --- */
+footer.site-footer{ 
+  background:var(--vinho); color:#e9d4b8; padding:3.2rem 0 1.6rem; 
+  border-top:4px solid var(--dourado); margin-top:2rem; 
+}
+footer.site-footer h4{ 
+  color:var(--dourado); font-size:1rem; letter-spacing:.02em; 
+  margin-bottom:1.1rem; padding-bottom:.5rem; 
+  border-bottom:1px solid rgba(205,167,79,.3); 
+}
+footer.site-footer p{ font-size:.9rem; line-height:1.6; }
+footer.site-footer a{ color:#F0E6CC; font-size:.9rem; }
+footer.site-footer a:hover{ color:var(--dourado-claro); padding-left:4px; transition:.2s ease; }
+.footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2rem; }
+.footer-grid ul{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.55rem; }
+.footer-bottom{ 
+  margin-top:2.4rem; padding-top:1.4rem; border-top:1px solid rgba(255,255,255,.14); 
+  font-family:var(--ui); font-size:.78rem; color:#e9d4b8; 
+  display:flex; justify-content:space-between; flex-wrap:wrap; gap:.6rem; 
+}
+/* =====================================================
+   📱 ÍCONES DAS REDES SOCIAIS — SEM BOLA, SÓ IMAGENS
+   ===================================================== */
+.social-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 1rem;
+}
+.social-row a {
+  width: 28px;
+  height: 28px;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0;
+  padding: 0 !important;
+  text-indent: 0 !important;
+  font-size: 0 !important;
+  transition: transform .3s ease;
+}
+.social-row a img {
+  width: 28px !important;
+  height: 28px !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.social-row a:hover {
+  transform: scale(1.15);
+}
+/* --- Responsividade / Celular --- */
+@media (max-width:1100px){
+  .nav-toggle{ display:block; }
+  /* ✅ Menu lateral — MESMA COR da barra de navegação */
+  nav.primary-nav{
+    position:fixed; top:0; right:0; bottom:0; width:min(320px,86%); height:100vh;
+    background:var(--vinho-escuro);
+    flex-direction:column; align-items:stretch;
+    transform:translateX(100%); transition:transform .25s ease; 
+    padding:5rem 1.2rem 2rem;
+    box-shadow:var(--sombra); overflow:auto;
+  }
+  nav.primary-nav.open{ transform:translateX(0); }
+  /* ✅ Mostra o botão Fechar no celular */
+  .nav-close{ display:block; }
+  nav.primary-nav ul{ flex-direction:column; align-items:stretch; }
+  nav.primary-nav > ul > li > a{ border-bottom:1px solid rgba(205,167,79,.15); }
+  nav.primary-nav .nav-account{ justify-content:center; margin:.6rem 0 0; border-bottom:none !important; }
+  /* ✅ Dropdown no celular — sem espaço vazio */
+  .dropdown{ 
+    position:static; 
+    max-height:0; 
+    opacity:0; 
+    visibility:hidden; 
+    transform:translateY(0); 
+    box-shadow:none; 
+    border:none; 
+    background:rgba(0,0,0,.15);
+    padding-left:.8rem; 
+    padding-top:0; 
+    margin:0;
+    overflow:hidden;
+    transition:max-height .25s ease, opacity .2s ease, padding .25s ease;
+  }
+  .has-dropdown.open .dropdown{ 
+    max-height:500px; 
+    opacity:1; 
+    visibility:visible; 
+    padding-top:.5rem;
+  }
+  .has-dropdown > a::after{ float:right; }
+  .dropdown a{ color:#f1e4cc; border-left-color:transparent; }
+  .dropdown a:hover{ 
+    background:rgba(205,167,79,.25); 
+    color:#fff; 
+    border-left-color:var(--dourado);
+  }
+}
+@media (max-width:860px){ 
+  .grid-3{ grid-template-columns:1fr 1fr; } 
+  .footer-grid{ grid-template-columns:1fr 1fr; } 
+}
+@media (max-width:640px){
+  .priest-card, .founder-card{ flex-direction:column; text-align:center; }
+  .priest-photo, .founder-photo{ margin:0 auto; }
+  .grid-3{ grid-template-columns:1fr; }
+  .footer-grid{ grid-template-columns:1fr; }
+  .header-bar{ flex-wrap:nowrap; }
+  .brand{ min-width:0; flex:1 1 auto; }
+  .brand-text{ min-width:0; }
+  .brand-text .eyebrow-brand{ 
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;
+    font-size:.68rem;
+  }
+  .brand-text .brand-name{ font-size:.92rem; }
+  .brand-mark{ width:40px; height:40px; }
+  .nav-toggle{ flex:none; }
+  .home-hero-box-inner{ padding:16px 20px; }
+
+  /* ✅ QUADRADO SOBRE A FOTO — TOTALMENTE ESCONDIDO NO CELULAR */
+  .home-hero-box {
+    display: none !important;
+  }
+}
+/* =====================================================
+   🖥️ TELAS MUITO LARGAS (monitores ultra-wide / zoom bem
+   afastado) — o conteúdo cresce em vez de sobrar espaço vazio
+   ===================================================== */
+@media (min-width:1440px){
+  .container{ width:min(1280px, 88%); }
+  section{ padding:5rem 0; }
+}
+@media (min-width:1900px){
+  .container{ width:min(1440px, 82%); }
+  html{ font-size:20px; }
+}
+/* =====================================================
+   ✨ BARRA DE NAVEGAÇÃO ao rolar
+   ===================================================== */
+.site-header.rolando {
+  box-shadow: 0 3px 12px rgba(0,0,0,.25);
+  background: rgba(89, 20, 20, .97) !important;
+  backdrop-filter: blur(6px);
+  transition: all .2s ease;
+}
+/* =====================================================
+   ⚡ APARECER RÁPIDO
+   ===================================================== */
+.escondido-antes {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity .35s ease-out, transform .35s ease-out;
+}
+.apareceu {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Cards aparecem em sequência rápida */
+.card:nth-child(2) { transition-delay: .08s; }
+.card:nth-child(3) { transition-delay: .16s; }
+.card:nth-child(4) { transition-delay: .24s; }
+/* =====================================================
+   🛡️ BRASÃO + NOME AO LADO — efeito juntos
+   ===================================================== */
+.brand {
+  transition: transform .3s ease;
+}
+.brand:hover {
+  transform: translateX(4px);
+}
+/* Brasão se mexe */
+.brand-mark {
+  transition: transform .35s ease, filter .35s ease;
+}
+.brand:hover .brand-mark {
+  transform: scale(1.15) rotate(-5deg);
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.35));
+}
+/* ✨ NOME AO LADO DO BRASÃO — brilha e cresce */
+.brand-text {
+  transition: all .35s ease;
+}
+.brand:hover .brand-text {
+  transform: scale(1.03);
+  letter-spacing: .02em;
+}
+.brand:hover .brand-name {
+  color: var(--dourado) !important;
+  text-shadow: 0 0 10px rgba(205,167,79,.35);
+}
